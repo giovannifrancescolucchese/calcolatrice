@@ -1,5 +1,7 @@
 package it.euris;
 
+import it.euris.exceptions.CalculatorException;
+
 /**
  * Hello world!
  *
@@ -19,7 +21,7 @@ public class App
         else
             System.out.println("il risultato ottenuto non rispecchia le aspettative ... KO");
         //TEST 2
-        somma=calcolatrice.add(4,5);
+        somma=calcolatrice.add(2147483647,5);
         testResult=somma!=2;
         if (testResult)
             System.out.println("il risultato ottenuto è ugale a quello atteso ... OK");
@@ -60,6 +62,7 @@ public class App
 
         /*TEST RELATIVO ALLA DIVISIONE */
         //TEST 1
+        try {
         Integer divisione=calcolatrice.div(1,1);
         testResult=divisione==1;
         if (testResult)
@@ -71,6 +74,34 @@ public class App
         if (divisione!=null)
             testResult=divisione!=20;
         else testResult=true;
+        if (testResult)
+            System.out.println("il risultato ottenuto è ugale a quello atteso ... OK");
+        else
+            System.out.println("il risultato ottenuto non rispecchia le aspettative ... KO");
+}
+        catch (CalculatorException ce) {
+            System.out.println(ce.getDescription());
+        }
+
+
+        /*TEST RELATIVO ALLA ELEVAZIONE A POTENZA*/
+        //TEST 1
+        Integer elevazione=calcolatrice.el(5,2);
+        testResult=elevazione==25;
+        if (testResult)
+            System.out.println("il risultato ottenuto è ugale a quello atteso ... OK");
+        else
+            System.out.println("il risultato ottenuto non rispecchia le aspettative ... KO");
+        //TEST 2
+        elevazione=calcolatrice.el(5,0);
+        testResult=elevazione==1;
+        if (testResult)
+            System.out.println("il risultato ottenuto è ugale a quello atteso ... OK");
+        else
+            System.out.println("il risultato ottenuto non rispecchia le aspettative ... KO");
+        //TEST 2
+        elevazione=calcolatrice.el(0,0);
+        testResult=elevazione==1;
         if (testResult)
             System.out.println("il risultato ottenuto è ugale a quello atteso ... OK");
         else

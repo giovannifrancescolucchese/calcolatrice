@@ -1,30 +1,42 @@
 package it.euris;
 
+import it.euris.exceptions.CalculatorException;
+
 public class Calcolatrice {
     public Calcolatrice() {}
 
-    public Integer add(Integer a, Integer b) {
+    public int add(int a, int b) {
         return a+b;
     }
 
-    public Integer sub(Integer a, Integer b) {
+    public int sub(int a, int b) {
         return a-b;
     }
 
-    public Integer mul(Integer a, Integer b) {
+    public int mul(int a, int b) {
         return a*b;
     }
 
-    public Integer div(Integer a, Integer b) {
-        Integer result=null;
+    public int div(int a, int b) throws CalculatorException {
+
         try {
-            result=a/b;
+            return a/b;
         }
         catch (ArithmeticException e) {
             System.out.println("Catturata eccezione: "+e.getMessage());
+            throw new CalculatorException("ECCEZIONE CALCOLATORE DIVISIONE PER 0");
         }
-        return result;
     }
+
+    public int el(int a, int b) {
+        return (int) Math.pow(a,b);
+    }
+
+    public int sqrt(int a) {
+        return (int) Math.sqrt(a);
+    }
+
+
 
 
 
