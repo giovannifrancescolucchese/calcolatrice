@@ -32,7 +32,10 @@ public class Calcolatrice {
         return (int) Math.pow(a,b);
     }
 
-    public int sqrt(int a) {
+    public int sqrt(int a) throws CalculatorException {
+        if (a<0)
+            throw new CalculatorException("CALCOLATORE radice quadrata di numero negativo");
+        else
         return (int) Math.sqrt(a);
     }
 
