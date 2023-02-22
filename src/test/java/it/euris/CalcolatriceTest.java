@@ -12,15 +12,31 @@ public class CalcolatriceTest {
     @DisplayName("precondition=>a=1 AND b=1, sut=>Calcolatrice.add, postcondition=>a+b=2")
     void addTwoNumbers() {
         Calcolatrice calcolatrice=new Calcolatrice();
-        assertEquals(2, calcolatrice.add(1,1),"1 +1 should be 2");
+        try {
+            assertEquals(2, calcolatrice.add(1,1),"1 +1 should be 2");
+        } catch (CalculatorException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test
     @DisplayName("precondition=>a=4 AND b=5, sut=>Calcolatrice.add, postcondition=>a+b=9")
     void addTwoNumbers_2() {
         Calcolatrice calcolatrice=new Calcolatrice();
-        assertEquals(9, calcolatrice.add(4,5),"4 +5 should be 9");
+        try {
+            assertEquals(9, calcolatrice.add(4,5),"4 +5 should be 9");
+        } catch (CalculatorException e) {
+            throw new RuntimeException(e);
+        }
     }
+
+    @Test
+    @DisplayName("precondition=>a=Integer.MAX_VALUE AND b=1, sut=>Calcolatrice.add, postcondition=>Exception")
+    void addTwoNumbers_3() {
+        Calcolatrice calcolatrice=new Calcolatrice();
+        assertThrows(CalculatorException.class,()-> calcolatrice.add(Integer.MAX_VALUE,1));
+    }
+
 
     @Test
     @DisplayName("precondition=>a=4 AND b=0, sut=>Calcolatrice.div, postcondition=>Exception")
@@ -57,7 +73,10 @@ public class CalcolatriceTest {
     @DisplayName("precondition=>a=10 , sut=>Calcolatrice.sqrt, postcondition=>sqrt(10)==3")
     void sqrtNumber_2() throws CalculatorException {
         Calcolatrice calcolatrice=new Calcolatrice();
-        assertEquals(3, calcolatrice.sqrt(-10),"sqrt 10 sould be 3");
+        //assertDoesNotThrow(()->calcolatrice.sqrt(10),"nessuna eccezione lanciata...");
+        //assertThrows(CalculatorException.class,()->calcolatrice.sqrt(10));
+        assertEquals(3, calcolatrice.sqrt(10),"sqrt 10 sould be 3");
     }
+
 
 }
