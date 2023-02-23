@@ -57,7 +57,7 @@ public class CalcolatriceTest {
     @DisplayName("precondition=>a=10 , sut=>Calcolatrice.sqrt, postcondition=>sqrt(10)==3")
     void sqrtNumber_2() throws CalculatorException {
         Calcolatrice calcolatrice=new Calcolatrice();
-        assertEquals(3, calcolatrice.sqrt(-10),"sqrt 10 sould be 3");
+        assertEquals(3, calcolatrice.sqrt(10),"sqrt 10 sould be 3");
     }
 
 }
