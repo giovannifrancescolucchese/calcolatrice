@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -60,6 +62,17 @@ public class CalcolatriceTest {
     @DisplayName("precondition=>a=10 , sut=>Calcolatrice.sqrt, postcondition=>sqrt(10)==3")
     void givenSqrtWhen10ThenReturn3() throws CalculatorException {
         assertEquals(3, calcolatrice.sqrt(10),"sqrt 10 sould be 3");
+    }
+
+    @ParameterizedTest(name="GivenFirstArgument {0} AndSecondArgument {1} WhenAddThenShouldReturn {2}")
+    @CsvSource({
+            "0,  1,  1",
+            "0, -1, -1",
+            "-50, 50,  0",
+            Integer.MAX_VALUE+", "+ Integer.MAX_VALUE+", -2"
+    })
+    void addWithBvaValues(int first, int second, int expectedResult) {
+        assertEquals(expectedResult, calcolatrice.add(first,second), ()->String.format("%d + %d should equals %d", first,second,expectedResult));
     }
 
 }
