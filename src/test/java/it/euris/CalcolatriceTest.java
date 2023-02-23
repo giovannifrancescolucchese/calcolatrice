@@ -46,7 +46,13 @@ public class CalcolatriceTest {
     @Test
     @DisplayName("precondition=>a=4 AND b=0, sut=>Calcolatrice.el, postcondition=>4^0!=0")
     void givenElWhenA4AndB0ThenNotReturn0() {
-        assertNotEquals(0, calcolatrice.el(4,0),"4^0 should not be 0");
+        //arrange
+        int a=4;
+        int b=0;
+        //act
+        int result=calcolatrice.el(a,b);
+        //assert
+        assertNotEquals(0, result,"4^0 should not be 0");
     }
 
 
