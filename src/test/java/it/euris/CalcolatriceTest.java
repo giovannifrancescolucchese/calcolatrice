@@ -22,15 +22,29 @@ public class CalcolatriceTest {
 
     @Test
     @DisplayName("precondition=>a=1 AND b=1, sut=>Calcolatrice.add, postcondition=>a+b=2")
-    void givenAddWhenBoth1ThenReturn2() {
+    void givenBoth1AddWhenAddThenReturn2() {
         assertEquals(2, calcolatrice.add(1,1),"1 +1 should be 2");
     }
 
     @Test
     @DisplayName("precondition=>a=4 AND b=5, sut=>Calcolatrice.add, postcondition=>a+b=9")
-    void givenAddWhenA4AndB5ThenReturn9() {
+    void givenA4AndB5WhenAddThenReturn9() {
         assertEquals(9, calcolatrice.add(4,5),"4 +5 should be 9");
     }
+
+    @Test
+    @DisplayName("precondition=>a=100 AND b=150, sut=>Calcolatrice.add, postcondition=>a+b=250")
+    void givenA100AndB150WhenAddThenReturn250() {
+        //arrange
+        int a=100;
+        int b=150;
+        int expectedResult=250;
+        //acts
+        int result=calcolatrice.add(a,b);
+        //assert
+        assertEquals(expectedResult, result,"100 +150 should be 250");
+    }
+
 
     @Test
     @DisplayName("precondition=>a=4 AND b=0, sut=>Calcolatrice.div, postcondition=>Exception")
