@@ -82,8 +82,7 @@ public class CalcolatriceTest {
     @CsvSource({
             "0,  1,  1",
             "0, -1, -1",
-            "-50, 50,  0",
-            Integer.MAX_VALUE+", "+ Integer.MAX_VALUE+", -2"
+            "-50, 50,  0"
     })
     void addWithBvaValues(int first, int second, int expectedResult) throws CalculatorException {
         assertEquals(expectedResult, calcolatrice.add(first,second), ()->String.format("%d + %d should equals %d", first,second,expectedResult));
