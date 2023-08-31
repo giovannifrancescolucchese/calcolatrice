@@ -7,6 +7,7 @@ public class Calcolatrice {
 
     public int add(int a, int b) throws CalculatorException {
         if (a>=0 && b>=0 && a+b<0) throw new CalculatorException("WRAP ROUNDING SOMMA");
+        //TODO: non è l'unico caso...finire
         return a+b;
     }
 
