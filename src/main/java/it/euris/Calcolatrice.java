@@ -28,7 +28,10 @@ public class Calcolatrice {
         }
     }
 
-    public int el(int a, int b) {
+    public int el(int a, int b) throws CalculatorException {
+        if (a==0 && b<0)
+            throw new CalculatorException("CALCOLATORE elevemaneto a potenza di 0");
+        else
         return (int) Math.pow(a,b);
     }
 

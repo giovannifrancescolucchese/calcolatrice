@@ -55,13 +55,13 @@ public class CalcolatriceTest {
 
     @Test
     @DisplayName("precondition=>a=4 AND b=0, sut=>Calcolatrice.el, postcondition=>4^0=1")
-    void givenElWhenA4AndB0ThenReturn1() {
+    void givenElWhenA4AndB0ThenReturn1() throws CalculatorException {
         assertEquals(1, calcolatrice.el(4,0),"4^0 should be 1");
     }
 
     @Test
     @DisplayName("precondition=>a=4 AND b=0, sut=>Calcolatrice.el, postcondition=>4^0!=0")
-    void givenElWhenA4AndB0ThenNotReturn0() {
+    void givenElWhenA4AndB0ThenNotReturn0() throws CalculatorException {
         assertNotEquals(0, calcolatrice.el(4,0),"4^0 should not be 0");
     }
 
@@ -88,5 +88,30 @@ public class CalcolatriceTest {
     void addWithBvaValues(int first, int second, int expectedResult) {
         assertEquals(expectedResult, calcolatrice.add(first,second), ()->String.format("%d + %d should equals %d", first,second,expectedResult));
     }
+
+
+    @ParameterizedTest(name="GivenFirstArgument {0} AndSecondArgument {1} WhenElAforBThenShouldReturn {2}")
+    @CsvSource({
+            "0,  0,  1",
+            //"0, -1, 0", errore
+            "1, 1,  1",
+            "1, 0,  1",
+            "-5, 3, -125"
+    })
+    void elWithBvaValues(int first, int second, int expectedResult) throws CalculatorException {
+        assertEquals(expectedResult, calcolatrice.el(first,second), ()->String.format("%d el %d should equals %d", first,second,expectedResult));
+    }
+
+    @Test
+    @DisplayName("")
+    void elWithException() {
+        //arrange
+        int a=0;
+        int b=-1;
+        //act all'interno dell'assert
+        //assert
+        assertThrows(CalculatorException.class,()->calcolatrice.el(a,b));
+    }
+
 
 }

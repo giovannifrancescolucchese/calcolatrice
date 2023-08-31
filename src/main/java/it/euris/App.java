@@ -8,8 +8,7 @@ import it.euris.exceptions.CalculatorException;
  */
 public class App 
 {
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) throws CalculatorException {
 
         Calcolatrice calcolatrice=new Calcolatrice();
         /*TEST RELATIVO ALLA SOMMA*/
