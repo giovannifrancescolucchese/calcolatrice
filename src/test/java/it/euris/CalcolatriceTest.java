@@ -22,19 +22,19 @@ public class CalcolatriceTest {
 
     @Test
     @DisplayName("precondition=>a=1 AND b=1, sut=>Calcolatrice.add, postcondition=>a+b=2")
-    void givenBoth1AddWhenAddThenReturn2() {
+    void givenBoth1AddWhenAddThenReturn2() throws CalculatorException {
         assertEquals(2, calcolatrice.add(1,1),"1 +1 should be 2");
     }
 
     @Test
     @DisplayName("precondition=>a=4 AND b=5, sut=>Calcolatrice.add, postcondition=>a+b=9")
-    void givenA4AndB5WhenAddThenReturn9() {
+    void givenA4AndB5WhenAddThenReturn9() throws CalculatorException {
         assertEquals(9, calcolatrice.add(4,5),"4 +5 should be 9");
     }
 
     @Test
     @DisplayName("precondition=>a=100 AND b=150, sut=>Calcolatrice.add, postcondition=>a+b=250")
-    void givenA100AndB150WhenAddThenReturn250() {
+    void givenA100AndB150WhenAddThenReturn250() throws CalculatorException {
         //arrange
         int a=100;
         int b=150;
@@ -85,8 +85,19 @@ public class CalcolatriceTest {
             "-50, 50,  0",
             Integer.MAX_VALUE+", "+ Integer.MAX_VALUE+", -2"
     })
-    void addWithBvaValues(int first, int second, int expectedResult) {
+    void addWithBvaValues(int first, int second, int expectedResult) throws CalculatorException {
         assertEquals(expectedResult, calcolatrice.add(first,second), ()->String.format("%d + %d should equals %d", first,second,expectedResult));
+    }
+
+
+    @ParameterizedTest(name="GivenFirstArgument {0} AndSecondArgument {1} WhenMulThenShouldReturn {2}")
+    @CsvSource({
+            "0,  1,  0",
+            "0, -1, 0",
+            "-50, 50,  -2500"
+    })
+    void mulWithBvaValues(int first, int second, int expectedResult) throws CalculatorException {
+        assertEquals(expectedResult, calcolatrice.mul(first,second), ()->String.format("%d + %d should equals %d", first,second,expectedResult));
     }
 
 
@@ -102,8 +113,39 @@ public class CalcolatriceTest {
         assertEquals(expectedResult, calcolatrice.el(first,second), ()->String.format("%d el %d should equals %d", first,second,expectedResult));
     }
 
+
     @Test
-    @DisplayName("")
+    @DisplayName("precondition (given) a=MaxValue and b=MaxValue when a for b then CalculatorException - Multiplication")
+    void mulWithException() {
+        //arrange
+        int a=Integer.MAX_VALUE;
+        int b=Integer.MAX_VALUE;
+        //act all'interno dell'assert
+        //assert
+        assertThrows(CalculatorException.class,()->calcolatrice.mul(a,b));
+    }
+
+    @Test
+    @DisplayName("precondition (given) a=MaxValue and b=MaxValue when a for b then CalculatorException - Multiplication")
+    void mulWithException2() {
+        //arrange
+        int a=Integer.MAX_VALUE;
+        int b=Integer.MAX_VALUE;
+        //act
+        CalculatorException ex=null;
+        try {
+            calcolatrice.mul(a,b);
+        }
+        catch (CalculatorException ce) {
+            ex=ce;
+        }
+        //assert
+        assertEquals(ex.getDescription(),"WRAP ROUNDING MOLTIPLICAZIONE ");
+    }
+
+
+    @Test
+    @DisplayName("precondition (given) a=0 and b=-1 when elevation a for b then CalculatorException")
     void elWithException() {
         //arrange
         int a=0;

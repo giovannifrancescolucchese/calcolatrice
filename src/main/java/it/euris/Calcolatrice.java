@@ -5,7 +5,8 @@ import it.euris.exceptions.CalculatorException;
 public class Calcolatrice {
     public Calcolatrice() {}
 
-    public int add(int a, int b) {
+    public int add(int a, int b) throws CalculatorException {
+        if (a>=0 && b>=0 && a+b<0) throw new CalculatorException("WRAP ROUNDING SOMMA");
         return a+b;
     }
 
@@ -13,8 +14,15 @@ public class Calcolatrice {
         return a-b;
     }
 
-    public int mul(int a, int b) {
-        return a*b;
+    public int mul(int a, int b) throws CalculatorException {
+        int result=0;
+        for (int i=1;i<=b;i++)
+            try {
+        result=this.add(result,a);
+        } catch (CalculatorException ex) {
+        throw new CalculatorException("WRAP ROUNDING MOLTIPLICAZIONE");
+            }
+         return result;
     }
 
     public int div(int a, int b) throws CalculatorException {
